@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SessionController!{% endblock %}
+
+{% block body %}
+
+<h1>Add Session</h1>
+
+{# {{ form(formAddSession) }} #}
+
+{{ form_start(formAddSession) }}
+
+<div class="row">
+    <div class="col-sm">
+        {{ form_row(formAddSession.title) }}
+    </div>
+    <div class="col-sm">
+        {{ form_row(formAddSession.nbPlaces) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm">
+        {{ form_row(formAddSession.startDate) }}
+    </div>
+    <div class="col-sm">
+        {{ form_row(formAddSession.endDate) }}
+    </div>
+</div>
+{{ form_row(formAddSession.programDetails) }}
+{{ form_row(formAddSession.add) }}
+
+{{ form_end(formAddSession) }}
+
+{% endblock %}
