@@ -1,32 +1,46 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello SessionController!{% endblock %}
-
-{% block body %}
+{% extends 'base.html.twig' %} {% block title %}Hello SessionController!{%
+endblock %} {% block body %}
 
 <h1>Add Session</h1>
 
 {# {{ form(formAddSession) }} #}
 
-{{ form_start(formAddSession) }}
+{{
+  form_start(formAddSession, {
+    attr: { class: "p-10 bg-white rounded shadow-xl" }
+  })
+}}
 
 <div class="row">
-    <div class="col-sm">
-        {{ form_row(formAddSession.title) }}
-    </div>
-    <div class="col-sm">
-        {{ form_row(formAddSession.nbPlaces) }}
+  <div class="col-sm">
+    {{ form_row(formAddSession.title) }}
+  </div>
+  <div class="col-sm">
+    {{ form_row(formAddSession.nbPlaces) }}
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm">
+    {{ form_row(formAddSession.startDate) }}
+  </div>
+  <div class="col-sm">
+      {{ form_row(formAddSession.endDate) }}
     </div>
 </div>
 <div class="row">
+    {{ form_row(formAddSession.programDetails) }}
+</div>
+<div class="row">
     <div class="col-sm">
-        {{ form_row(formAddSession.startDate) }}
+        {{ form_row(formAddSession.students) }}
     </div>
     <div class="col-sm">
-        {{ form_row(formAddSession.endDate) }}
+        {{ form_row(formAddSession.former) }}
+    </div>
+    <div class="col-sm">
+        {{ form_row(formAddSession.category) }}
     </div>
 </div>
-{{ form_row(formAddSession.programDetails) }}
 {{ form_row(formAddSession.add) }}
 
 {{ form_end(formAddSession) }}

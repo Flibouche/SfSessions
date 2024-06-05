@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class SessionType extends AbstractType
 {
@@ -37,7 +38,9 @@ class SessionType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('nbPlaces')
+            ->add('nbPlaces', IntegerType::class, [
+                
+            ])
             ->add('programDetails')
             ->add('students', EntityType::class, [
                 'class' => Student::class,
@@ -54,7 +57,7 @@ class SessionType extends AbstractType
             ])
             ->add('add', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-success'
+                    'class' => 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
                 ]
             ]);
     }

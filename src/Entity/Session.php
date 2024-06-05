@@ -202,4 +202,9 @@ class Session
 
         return $this;
     }
+
+    public function __toString(): String
+    {
+        return $this->title;
+    }
 }
