@@ -22,38 +22,51 @@ class SessionType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'attr' => [
-                    'class' => 'class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"',
+                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded',
                     'placeholder' => 'Title',
                 ]
             ])
             ->add('startDate', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
                 ]
             ])
             ->add('endDate', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
                 ]
             ])
             ->add('nbPlaces', IntegerType::class, [
-                
+                'attr' => [
+                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                ]
             ])
-            ->add('programDetails')
-            ->add('students', EntityType::class, [
-                'class' => Student::class,
-                'choice_label' => 'id',
-                'multiple' => true,
+            ->add('programDetails', TextType::class, [
+                'attr' => [
+                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                ]
             ])
+            // ->add('students', EntityType::class, [
+            //     'class' => Student::class,
+            //     'choice_label' => 'fullName',
+            //     'attr' => [
+            //         'id' => 'dropdown',
+            //         'class' => 'z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700'
+            //     ]
+            // ])
             ->add('former', EntityType::class, [
                 'class' => Former::class,
-                'choice_label' => 'id',
+                'choice_label' => 'fullName',
+                'attr' => [
+                    'id' => 'dropdown',
+                    'class' => 'w-full z-10 bg-white divide-y divide-gray-100 px-5  py-4 text-gray-700 bg-gray-200 rounded shadow w-44 dark:bg-gray-700'
+                ]
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
             ->add('add', SubmitType::class, [
                 'attr' => [

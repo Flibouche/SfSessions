@@ -77,6 +77,11 @@ class Former
         return $this;
     }
 
+    public function getFullName(): String
+    {
+        return $this->name . " " . $this->surname;
+    }
+
     public function getSex(): ?string
     {
         return $this->sex;

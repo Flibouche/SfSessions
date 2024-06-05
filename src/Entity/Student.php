@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\String_;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 class Student
@@ -75,6 +76,11 @@ class Student
         $this->surname = $surname;
 
         return $this;
+    }
+
+    public function getFullName(): String
+    {
+        return $this->name . " " . $this->surname;
     }
 
     public function getSex(): ?string
@@ -159,5 +165,10 @@ class Student
         $this->sessions->removeElement($session);
 
         return $this;
+    }
+
+    public function __toString(): String
+    {
+        return $this->name . " " . $this->surname;
     }
 }
