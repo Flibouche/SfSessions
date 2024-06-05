@@ -31,11 +31,11 @@ endblock %} {% block body %}
               {{ form_row(formAddSession.nbPlaces) }}
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm">
+          <div class="flex gap-2">
+            <div class="w-full">
               {{ form_row(formAddSession.startDate) }}
             </div>
-            <div class="col-sm">
+            <div class="w-full">
               {{ form_row(formAddSession.endDate) }}
             </div>
           </div>
@@ -53,7 +53,9 @@ endblock %} {% block body %}
               {{ form_row(formAddSession.category) }}
             </div>
           </div>
-          {{ form_row(formAddSession.add) }}
+          <div class="mt-5">
+            {{ form_row(formAddSession.add) }}
+          </div>
 
           {{ form_end(formAddSession) }}
         </div>

@@ -171,4 +171,9 @@ class Former
 
         return $this;
     }
+
+    public function __toString(): String
+    {
+        return $this->name . " " . $this->surname;
+    }
 }

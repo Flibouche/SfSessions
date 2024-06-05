@@ -1,20 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ModuleController!{% endblock %}
+{% block title %}List of modules{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h1>List of modules</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/laragon/www/Kevin_Pfiffer/SfSessions/src/Controller/ModuleController.php</code></li>
-        <li>Your template at <code>C:/laragon/www/Kevin_Pfiffer/SfSessions/templates/module/index.html.twig</code></li>
-    </ul>
-</div>
+<h2>Add a module</h2>
+<a href="{{ path('new_module') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-block">Add a module</a>
+
+{% for module in modules %}
+    <a href="{{ path('show_module', {'id': module.id}) }}">{{ module }}</a>
+{% endfor %}
+
+
 {% endblock %}

@@ -137,4 +137,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function __toString(): String
+    {
+        return $this->pseudo;
+    }
 }

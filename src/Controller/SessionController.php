@@ -59,7 +59,6 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('app_session');
     }
 
-
     #[Route('/session/{id}', name: 'show_session')]
     public function show(Session $session): Response
     {
