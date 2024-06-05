@@ -6,4 +6,13 @@
 
 <h1>Session Detail</h1>
 
+<a href="{{ path('app_session') }}"><i class="fa-solid fa-rotate-left"></i></a>
+
+<h2>{{ session }}</h2> <br>
+
+Session start : {{ session.startDate | date("d.m.Y") }} <br>
+Session end : {{ session.endDate | date("d.m.Y") }} <br>
+Number of places : {{ session.nbPlaces }} <br>
+Program Details : {{ session.programDetails }} <br>
+
 {% endblock %}

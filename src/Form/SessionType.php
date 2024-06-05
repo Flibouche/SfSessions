@@ -60,13 +60,17 @@ class SessionType extends AbstractType
                 'class' => Former::class,
                 'choice_label' => 'fullName',
                 'attr' => [
-                    'id' => 'dropdown',
-                    'class' => 'w-full z-10 bg-white divide-y divide-gray-100 px-5  py-4 text-gray-700 bg-gray-200 rounded shadow w-44 dark:bg-gray-700'
+                    'id' => 'select',
+                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
                 ]
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
+                'attr' => [
+                    'id' => 'select',
+                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                ]
             ])
             ->add('add', SubmitType::class, [
                 'attr' => [
