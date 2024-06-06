@@ -16,6 +16,10 @@ class StudentController extends AbstractController
     #[Route('/student', name: 'app_student')]
     public function index(StudentRepository $studentRepository): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $students = $studentRepository->findBy([], ["name" => "ASC"]);
         return $this->render('student/index.html.twig', [
             'students' => $students,
@@ -26,6 +30,10 @@ class StudentController extends AbstractController
     #[Route('/student/{id}/edit', name: 'edit_student')]
     public function new_edit(Student $student = null, Request $request, EntityManagerInterface $entityManager): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         if (!$student) {
             $student = new Student();
         }
@@ -53,6 +61,10 @@ class StudentController extends AbstractController
     #[Route('/student/{id}/delete', name: 'delete_student')]
     public function delete(student $student, EntityManagerInterface $entityManager)
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         $entityManager->remove($student);
         $entityManager->flush();
 
@@ -62,6 +74,10 @@ class StudentController extends AbstractController
     #[Route('/student/{id}', name: 'show_student')]
     public function show(student $student): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         return $this->render('student/show.html.twig', [
             'student' => $student
         ]);

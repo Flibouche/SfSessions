@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ModuleController extends AbstractController
@@ -16,6 +17,10 @@ class ModuleController extends AbstractController
     #[Route('/module', name: 'app_module')]
     public function index(ModuleRepository $moduleRepository): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $modules = $moduleRepository->findBy([], ["title" => "ASC"]);
         return $this->render('module/index.html.twig', [
             'modules' => $modules,
@@ -26,6 +31,10 @@ class ModuleController extends AbstractController
     #[Route('/module/{id}/edit', name: 'edit_module')]
     public function new_edit(Module $module = null, Request $request, EntityManagerInterface $entityManager): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         if (!$module) {
             $module = new Module();
         }
@@ -50,9 +59,14 @@ class ModuleController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/module/{id}/delete', name: 'delete_module')]
     public function delete(module $module, EntityManagerInterface $entityManager)
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         $entityManager->remove($module);
         $entityManager->flush();
 
@@ -62,6 +76,10 @@ class ModuleController extends AbstractController
     #[Route('/module/{id}', name: 'show_module')]
     public function show(module $module): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         return $this->render('module/show.html.twig', [
             'module' => $module
         ]);

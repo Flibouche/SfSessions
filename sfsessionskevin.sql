@@ -24,11 +24,12 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table sfsessionskevin.category : ~1 rows (environ)
+-- Listage des données de la table sfsessionskevin.category : ~2 rows (environ)
 INSERT INTO `category` (`id`, `name`) VALUES
-	(1, 'Développement');
+	(1, 'Développement'),
+	(2, 'Bureautique');
 
 -- Listage de la structure de la table sfsessionskevin. doctrine_migration_versions
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
@@ -54,12 +55,13 @@ CREATE TABLE IF NOT EXISTS `former` (
   `mail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table sfsessionskevin.former : ~2 rows (environ)
+-- Listage des données de la table sfsessionskevin.former : ~3 rows (environ)
 INSERT INTO `former` (`id`, `name`, `surname`, `sex`, `birthdate`, `town`, `mail`, `phone`) VALUES
 	(1, 'Mickaël', 'Murmann', 'M', '1980-05-10', 'Strasbourg', 'mickael@formateur.com', '0650505050'),
-	(2, 'Stéphane', 'Smail', 'M', '1970-01-10', 'Mulhouse', 'stephane@formateur.com', '0750403020');
+	(2, 'Stéphane', 'Smail', 'M', '1970-01-10', 'Mulhouse', 'stephane@formateur.com', '0750403020'),
+	(3, 'Quentin', 'Mathieu', 'M', '1998-05-14', 'Bordeaux', 'quentin@formateur.com', '0375889745');
 
 -- Listage de la structure de la table sfsessionskevin. messenger_messages
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
@@ -86,14 +88,15 @@ CREATE TABLE IF NOT EXISTS `module` (
   PRIMARY KEY (`id`),
   KEY `IDX_C24262812469DE2` (`category_id`),
   CONSTRAINT `FK_C24262812469DE2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table sfsessionskevin.module : ~4 rows (environ)
+-- Listage des données de la table sfsessionskevin.module : ~5 rows (environ)
 INSERT INTO `module` (`id`, `category_id`, `title`) VALUES
-	(1, 1, 'Module Test'),
-	(2, 1, 'php'),
-	(3, 1, 'html'),
-	(4, 1, 'CSS');
+	(1, 1, 'JavaScript'),
+	(2, 1, 'PHP'),
+	(3, 1, 'HTML'),
+	(4, 1, 'CSS'),
+	(5, 1, 'SQL');
 
 -- Listage de la structure de la table sfsessionskevin. program
 CREATE TABLE IF NOT EXISTS `program` (
@@ -129,12 +132,12 @@ CREATE TABLE IF NOT EXISTS `session` (
   KEY `IDX_D044D5D412469DE2` (`category_id`),
   CONSTRAINT `FK_D044D5D412469DE2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
   CONSTRAINT `FK_D044D5D46C20F19` FOREIGN KEY (`former_id`) REFERENCES `former` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table sfsessionskevin.session : ~2 rows (environ)
 INSERT INTO `session` (`id`, `former_id`, `category_id`, `title`, `start_date`, `end_date`, `nb_places`, `program_details`) VALUES
-	(1, 1, 1, 'Développeur Web & Web mobile', '2024-06-10', '2024-06-21', 20, 'Ceci est un test'),
-	(2, 1, 1, 'qdqsdqsd', '2024-10-10', '2024-12-10', 50, 'zeazeez');
+	(1, 1, 1, 'Développeur Web & Web mobile', '2024-06-10', '2024-06-21', 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
+	(2, 2, 1, 'Concepteur et Développeur d\'Applications', '2024-10-10', '2025-07-05', 15, 'Test');
 
 -- Listage de la structure de la table sfsessionskevin. student
 CREATE TABLE IF NOT EXISTS `student` (
@@ -147,12 +150,13 @@ CREATE TABLE IF NOT EXISTS `student` (
   `mail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table sfsessionskevin.student : ~2 rows (environ)
 INSERT INTO `student` (`id`, `name`, `surname`, `sex`, `birthdate`, `town`, `mail`, `phone`) VALUES
 	(1, 'Test', 'TestS', 'M', '2010-10-10', 'Strasbourg', 'test@mail.com', '0666666666'),
-	(2, 'Deuxieme', 'TestEncore', 'F', '2000-10-05', 'Belfort', 'testencore@mail.com', '0360606060');
+	(2, 'Deuxieme', 'TestEncore', 'F', '2000-10-05', 'Belfort', 'testencore@mail.com', '0360606060'),
+	(3, 'TestTrois', 'TroisTest', 'M', '1999-10-10', 'Strasbourg', 'test@test.com', '0506060606');
 
 -- Listage de la structure de la table sfsessionskevin. student_session
 CREATE TABLE IF NOT EXISTS `student_session` (
@@ -165,10 +169,11 @@ CREATE TABLE IF NOT EXISTS `student_session` (
   CONSTRAINT `FK_3D72602CCB944F1A` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table sfsessionskevin.student_session : ~2 rows (environ)
+-- Listage des données de la table sfsessionskevin.student_session : ~3 rows (environ)
 INSERT INTO `student_session` (`student_id`, `session_id`) VALUES
 	(1, 1),
-	(2, 1);
+	(2, 1),
+	(3, 2);
 
 -- Listage de la structure de la table sfsessionskevin. user
 CREATE TABLE IF NOT EXISTS `user` (
@@ -184,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- Listage des données de la table sfsessionskevin.user : ~1 rows (environ)
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `pseudo`, `is_verified`) VALUES
-	(3, 'flibouche@admin.com', '[]', '$2y$13$06UyeoJxHFY3qDgiZHma8Oq72fhLIhnNfqCWRxfkdxMVU0yyfSgNO', 'Flibouche', 1);
+	(3, 'flibouche@admin.com', '["ROLE_ADMIN"]', '$2y$13$06UyeoJxHFY3qDgiZHma8Oq72fhLIhnNfqCWRxfkdxMVU0yyfSgNO', 'Flibouche', 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

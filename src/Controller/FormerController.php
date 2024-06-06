@@ -16,6 +16,10 @@ class FormerController extends AbstractController
     #[Route('/former', name: 'app_former')]
     public function index(FormerRepository $formerRepository): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $formers = $formerRepository->findBy([], ["name" => "ASC"]);
         return $this->render('former/index.html.twig', [
             'formers' => $formers,
@@ -26,6 +30,10 @@ class FormerController extends AbstractController
     #[Route('/former/{id}/edit', name: 'edit_former')]
     public function new_edit(Former $former = null, Request $request, EntityManagerInterface $entityManager): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         if (!$former) {
             $former = new Former();
         }
@@ -53,6 +61,10 @@ class FormerController extends AbstractController
     #[Route('/former/{id}/delete', name: 'delete_former')]
     public function delete(former $former, EntityManagerInterface $entityManager)
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $entityManager->remove($former);
         $entityManager->flush();
 
@@ -62,6 +74,10 @@ class FormerController extends AbstractController
     #[Route('/former/{id}', name: 'show_former')]
     public function show(former $former): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         return $this->render('former/show.html.twig', [
             'former' => $former
         ]);

@@ -16,6 +16,10 @@ class SessionController extends AbstractController
     #[Route('/session', name: 'app_session')]
     public function index(SessionRepository $sessionRepository): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $sessions = $sessionRepository->findBy([], ["title" => "ASC"]);
         return $this->render('session/index.html.twig', [
             'sessions' => $sessions,
@@ -26,6 +30,10 @@ class SessionController extends AbstractController
     #[Route('/session/{id}/edit', name: 'edit_session')]
     public function new_edit(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         if (!$session) {
             $session = new Session();
         }
@@ -53,6 +61,10 @@ class SessionController extends AbstractController
     #[Route('/session/{id}/delete', name: 'delete_session')]
     public function delete(Session $session, EntityManagerInterface $entityManager)
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         $entityManager->remove($session);
         $entityManager->flush();
 
@@ -62,6 +74,10 @@ class SessionController extends AbstractController
     #[Route('/session/{id}', name: 'show_session')]
     public function show(Session $session = null, SessionRepository $sr): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         $notRegistered = $sr->findNotRegistered($session->getId());
         $unscheduledModules = $sr->findUnscheduledModules($session->getId());
 

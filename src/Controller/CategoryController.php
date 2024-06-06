@@ -16,6 +16,10 @@ class CategoryController extends AbstractController
     #[Route('/category', name: 'app_category')]
     public function index(CategoryRepository $categoryRepository): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $categories = $categoryRepository->findBy([], ["name" => "ASC"]);
         return $this->render('category/index.html.twig', [
             'categories' => $categories,
@@ -26,6 +30,10 @@ class CategoryController extends AbstractController
     #[Route('/category/{id}/edit', name: 'edit_category')]
     public function new_edit(Category $category = null, Request $request, EntityManagerInterface $entityManager): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         if (!$category) {
             $category = new Category();
         }
@@ -53,6 +61,10 @@ class CategoryController extends AbstractController
     #[Route('/category/{id}/delete', name: 'delete_category')]
     public function delete(category $category, EntityManagerInterface $entityManager)
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         $entityManager->remove($category);
         $entityManager->flush();
 
@@ -62,6 +74,10 @@ class CategoryController extends AbstractController
     #[Route('/category/{id}', name: 'show_category')]
     public function show(category $category): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         return $this->render('category/show.html.twig', [
             'category' => $category
         ]);
