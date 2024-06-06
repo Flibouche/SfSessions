@@ -1,20 +1,15 @@
 {% extends 'base.html.twig' %} {% block title %}Hello SessionController!{%
 endblock %} {% block body %}
 
-<h1>Add Session</h1>
-
-<a href="{{ path('app_session') }}"><i class="fa-solid fa-rotate-left"></i></a>
-
-{# {{ form(formAddSession) }} #}
-
 <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
   <main class="w-full flex-grow p-6">
-    <h1 class="w-full text-3xl text-black pb-6">Forms</h1>
+    <h1 class="w-full text-3xl text-black">Add a session</h1>
+    <a href="{{ path('app_session') }}"><i class="fa-solid fa-rotate-left"></i></a>
 
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap mb-10">
       <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
         <p class="text-xl pb-6 flex items-center">
-          <i class="fas fa-list mr-3"></i> Contact Form
+          <i class="fas fa-list mr-3"></i> New session Form
         </p>
         <div class="leading-loose">
           {{

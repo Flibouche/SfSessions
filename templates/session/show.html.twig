@@ -17,12 +17,32 @@ Number of places : {{ session.nbPlaces }} <br>
 Program Details : {{ session.programDetails }} <br>
 
 <h2>Programme</h2>
+<br>
+<p>Scheduled Modules :</p>
 {% for program in session.programs %}
-    {{ program.module }} {{ program.nbDays }} jours<br>
+{{ program.module }} {{ program.nbDays }} jours<br>
 {% endfor %}
 
-{% for student in session.students %}
-    {{ student }}
+<br>
+
+<p>Unscheduled Modules :</p>
+{% for program in unscheduledModules %}
+    <li>{{ program }}</li>
 {% endfor %}
+
+<br>
+
+<p>Students registered :</p>
+{% for student in session.students %}
+<li>{{ student }}</li>
+{% endfor %}
+
+<br>
+
+<p>Students not registered : </p>
+{% for student in notRegistered %}
+<li>{{ student }}</li>
+{% endfor %}
+
 
 {% endblock %}

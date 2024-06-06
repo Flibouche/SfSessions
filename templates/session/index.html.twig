@@ -4,13 +4,72 @@
 
 {% block body %}
 
-<h1>List of sessions</h1>
+<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+        <h1 class="w-full text-3xl text-black">List of sessions</h1>
+        <a href="{{ path('new_session') }}"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-block">Add
+            a session</a>
 
-<h2>Add a session</h2>
-<a href="{{ path('new_session') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-block">Add a session</a>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Sessions <i class="fa-solid fa-arrow-down"></i>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Modules <i class="fa-solid fa-arrow-down"></i>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Duration <i class="fa-solid fa-arrow-down"></i>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Nb places <i class="fa-solid fa-arrow-down"></i>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Statut <i class="fa-solid fa-arrow-down"></i>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Actions <i class="fa-solid fa-arrow-down"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        {% for session in sessions %}
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <a href="{{ path('show_session', {'id': session.id}) }}">{{ session }}</a>
+                        </th>
+                        <td class="px-6 py-4">
+                            <p>Nb modules à définir</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p>{{ session.startDate | date("d.m.Y") }} - {{ session.endDate | date("d.m.Y") }}</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p>{{ session.nbPlaces }}</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            {% if session.nbPlaces == 0 %}
+                            <p>CLOSED</p>
+                            {% else %}
+                            <p>OPEN</p>
+                            {% endif %}
+                        </td>
+                        <td class="flex px-6 py-4 gap-3">
+                            <a href="{{ path('edit_session', {'id': session.id}) }}"><i class="fa-solid fa-pen"></i></a>
+                            <a href="{{ path('delete_session', {'id': session.id}) }}"><i
+                                    class="fa-solid fa-trash-can"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
 
-{% for session in sessions %}
-    <a href="{{ path('show_session', {'id': session.id}) }}">{{ session }}</a>
-{% endfor %}
+
 
 {% endblock %}
