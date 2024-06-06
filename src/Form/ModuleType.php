@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ModuleType extends AbstractType
@@ -15,10 +16,19 @@ class ModuleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
+            ->add('title', TextType::class, [
+                'attr' => [
+                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded',
+                    'placeholder' => 'Title',
+                ]
+            ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
+                'attr' => [
+                    'id' => 'select',
+                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                ]
             ])
             ->add('add', SubmitType::class, [
                 'attr' => [
