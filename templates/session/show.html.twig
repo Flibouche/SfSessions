@@ -4,45 +4,112 @@
 
 {% block body %}
 
-<h1>Session Detail</h1>
+<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+        <div class="w-full flex">
+            <h1 class="w-full text-3xl text-black">{{ session }}</h1>
+            <a href="{{ path('app_session') }}"><i class="fa-solid fa-rotate-left"></i></a>
+        </div>
+        <p>From {{ session.startDate | date("d.m.Y") }} to {{ session.endDate | date("d.m.Y") }}</p>
+        Number of places : {{ session.nbPlaces }} <br>
+        Details : {{ session.programDetails }} <br>
+        Animed by : {{ session.former }}
+        <div class="w-full overflow-x-auto grid grid-cols-2 gap-10 my-10">
+            <div>
+                <h2 class="w-full text-2xl text-black">Registered students ({{ session.students | length }})</h2>
+                <div class="overflow-hidden min-w-max">
+                    <div
+                        class="grid grid-cols-2 p-4 text-sm font-medium text-gray-900 bg-gray-200 border-t border-b border-gray-400 gap-x-16 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                        <div class="flex items-center">Student</div>
+                        <div>Delete</div>
+                    </div>
+                    {% for student in session.students %}
+                    <div
+                        class="grid grid-cols-2 px-4 py-2 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                        <div class="text-gray-500 dark:text-gray-400">{{ student }}</div>
+                        <div>
+                            <svg class="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-<a href="{{ path('app_session') }}"><i class="fa-solid fa-rotate-left"></i></a>
+            <div>
+                <h2 class="w-full text-2xl text-black">Scheduled modules ({{ session.programs | length }})</h2>
+                <div class="overflow-hidden min-w-max">
+                    <div class="grid grid-cols-2 p-4 text-sm font-medium text-gray-900 bg-gray-200 border-t border-b border-gray-400 gap-x-16 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                        <div class="flex items-center">Module</div>
+                        <div>Delete</div>
+                    </div>
+                    {% for program in session.programs %}
+                    <div
+                        class="grid grid-cols-2 px-4 py-2 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                        <div class="text-gray-500 dark:text-gray-400">{{ program.module }} ({{ program.nbDays }} days)
+                        </div>
+                        <div>
+                            <svg class="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
 
+        <div class="w-full overflow-x-auto grid grid-cols-2 gap-10 mt-10">
+            <div>
+                <h2 class="w-full text-2xl text-black">Unregistered students ({{ notRegistered | length }})</h2>
+                <div class="overflow-hidden min-w-max">
+                    <div
+                        class="grid grid-cols-2 p-4 text-sm font-medium text-gray-900 bg-gray-200 border-t border-b border-gray-400 gap-x-16 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                        <div class="flex items-center">Student</div>
+                        <div>Add</div>
+                    </div>
+                    {% for student in notRegistered %}
+                    <div
+                        class="grid grid-cols-2 px-4 py-2 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                        <div class="text-gray-500 dark:text-gray-400">{{ student }}</div>
+                        <div>
+                            <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                            </svg>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-<h2>{{ session }}</h2> <br>
-
-Session start : {{ session.startDate | date("d.m.Y") }} <br>
-Session end : {{ session.endDate | date("d.m.Y") }} <br>
-Number of places : {{ session.nbPlaces }} <br>
-Program Details : {{ session.programDetails }} <br>
-
-<h2>Programme</h2>
-<br>
-<p>Scheduled Modules :</p>
-{% for program in session.programs %}
-{{ program.module }} {{ program.nbDays }} jours<br>
-{% endfor %}
-
-<br>
-
-<p>Unscheduled Modules :</p>
-{% for program in unscheduledModules %}
-    <li>{{ program }}</li>
-{% endfor %}
-
-<br>
-
-<p>Students registered :</p>
-{% for student in session.students %}
-<li>{{ student }}</li>
-{% endfor %}
-
-<br>
-
-<p>Students not registered : </p>
-{% for student in notRegistered %}
-<li>{{ student }}</li>
-{% endfor %}
-
+            <div>
+                <h2 class="w-full text-2xl text-black">Unscheduled modules ({{ unscheduledModules | length }})</h2>
+                <div class="overflow-hidden min-w-max">
+                    <div
+                        class="grid grid-cols-2 p-4 text-sm font-medium text-gray-900 bg-gray-200 border-t border-b border-gray-400 gap-x-16 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                        <div class="flex items-center">Module</div>
+                        <div>Add</div>
+                    </div>
+                    {% for program in unscheduledModules %}
+                    <div
+                        class="grid grid-cols-2 px-4 py-2 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                        <div class="text-gray-500 dark:text-gray-400">{{ program }} (nbDays)</div>
+                        <div>
+                            <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                            </svg>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
 
 {% endblock %}

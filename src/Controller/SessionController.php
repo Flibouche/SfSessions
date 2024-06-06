@@ -36,9 +36,9 @@ class SessionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $employe = $form->getData();
+            $session = $form->getData();
             // Prepare PDO
-            $entityManager->persist($employe);
+            $entityManager->persist($session);
             // Execute PDO
             $entityManager->flush();
 

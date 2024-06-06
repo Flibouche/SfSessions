@@ -36,9 +36,9 @@ class FormerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $employe = $form->getData();
+            $former = $form->getData();
             // Prepare PDO
-            $entityManager->persist($employe);
+            $entityManager->persist($former);
             // Execute PDO
             $entityManager->flush();
 

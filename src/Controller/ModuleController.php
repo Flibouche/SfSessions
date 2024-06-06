@@ -36,9 +36,9 @@ class ModuleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $employe = $form->getData();
+            $module = $form->getData();
             // Prepare PDO
-            $entityManager->persist($employe);
+            $entityManager->persist($module);
             // Execute PDO
             $entityManager->flush();
 

@@ -36,9 +36,9 @@ class StudentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $employe = $form->getData();
+            $student = $form->getData();
             // Prepare PDO
-            $entityManager->persist($employe);
+            $entityManager->persist($student);
             // Execute PDO
             $entityManager->flush();
 

@@ -36,9 +36,9 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $employe = $form->getData();
+            $category = $form->getData();
             // Prepare PDO
-            $entityManager->persist($employe);
+            $entityManager->persist($category);
             // Execute PDO
             $entityManager->flush();
 
