@@ -2,17 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Program;
 use App\Entity\Session;
+use App\Entity\Student;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/session', name: 'app_session')]
     public function index(SessionRepository $sessionRepository): Response
     {
@@ -64,11 +68,68 @@ class SessionController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
-        
+
         $entityManager->remove($session);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_session');
+    }
+
+    #[Route('/session/add_student/{session}/{student}', name: 'add_student_session')]
+    public function addStudentSession(Session $session, Student $student, EntityManagerInterface $entityManager)
+    {
+
+        $session->addStudent($student);
+        $entityManager->persist($session);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+    }
+
+    #[Route('/session/remove_student/{session}/{student}', name: 'remove_student_session')]
+    public function removeStudentSession(Session $session, Student $student, EntityManagerInterface $entityManager)
+    {
+
+        $session->removeStudent($student);
+        $entityManager->persist($session);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+    }
+
+    // Je crée mon program, je l'instancie, je lui set les infos, une fois le programme crée : session addprogram,  Pour program : Set session, set module, set nbjours
+    #[Route('/session/add_program/{session}/{program}', name: 'add_program_session', methods: ['POST'])]
+    public function addProgramSession(Session $session, Program $program, Request $request, EntityManagerInterface $entityManager)
+    {
+
+        $form = $this->createForm(SessionType::class, $session);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $program = $form->getData();
+            // Prepare PDO
+            $entityManager->persist($program);
+            // Execute PDO
+            $entityManager->flush();
+
+            $session->addProgram($program);
+            $entityManager->persist($session);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+        }
+    }
+
+    #[Route('/session/remove_program/{session}/{program}', name: 'remove_program_session')]
+    public function removeProgramSession(Session $session, Program $program, EntityManagerInterface $entityManager)
+    {
+        $session->removeProgram($program);
+        $entityManager->persist($session);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
 
     #[Route('/session/{id}', name: 'show_session')]
@@ -77,7 +138,7 @@ class SessionController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
-        
+
         $notRegistered = $sr->findNotRegistered($session->getId());
         $unscheduledModules = $sr->findUnscheduledModules($session->getId());
 
