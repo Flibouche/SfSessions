@@ -4,4 +4,32 @@
 
 {% block body %}
 
+<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+        <div class="w-full flex">
+            <h1 class="w-full text-3xl text-black mb-5">{{ student }}</h1>
+            <a href="{{ path('app_session') }}"><i class="fa-solid fa-rotate-left"></i></a>
+        </div>
+
+        <div class="flex mb-5">
+            <div class="mr-3 border-2 border-black">
+                <img src="https://placehold.co/150x150" alt="">
+            </div>
+            <div>
+                <p>Sex : {{ student.sex }}</p>
+                <p>Birthdate : {{ student.birthdate | date("d.m.Y") }} ({{ student.age }})</p>
+                <p>Town : {{ student.town }}</p>
+                <p>Mail : {{ student.mail }}</p>
+                <p>Phone : {{ student.phone }}</p>
+            </div>
+        </div>
+
+        <h2 class="w-full text-2xl text-black mb-2">Upcoming session(s) :</h2>
+        {% for session in student.sessions %}
+        <p>{{ session }}</p>
+        {% endfor %}
+
+    </main>
+</div>
+
 {% endblock %}

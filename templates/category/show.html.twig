@@ -4,6 +4,19 @@
 
 {% block body %}
 
-<h1>Category Details</h1>
+<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+        <div class="w-full flex">
+            <h1 class="w-full text-3xl text-black mb-5">{{ category }}</h1>
+            <a href="{{ path('app_session') }}"><i class="fa-solid fa-rotate-left"></i></a>
+        </div>
+
+        {# <h2 class="w-full text-2xl text-black mb-2">Upcoming session(s) :</h2> #}
+        {% for session in category.sessions %}
+        <p>{{ session }}</p>
+        {% endfor %}
+
+    </main>
+</div>
 
 {% endblock %}
