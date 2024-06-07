@@ -48,14 +48,6 @@ class SessionType extends AbstractType
                     'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
                 ]
             ])
-            // ->add('students', EntityType::class, [
-            //     'class' => Student::class,
-            //     'choice_label' => 'fullName',
-            //     'attr' => [
-            //         'id' => 'dropdown',
-            //         'class' => 'z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700'
-            //     ]
-            // ])
             ->add('former', EntityType::class, [
                 'class' => Former::class,
                 'choice_label' => 'fullName',
@@ -83,6 +75,13 @@ class SessionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Session::class,
+            // enable/disable CSRF protection for this form
+            'csrf_protection' => true,
+            // the name of the hidden HTML field that stores the token
+            'csrf_field_name' => '_token',
+            // an arbitrary string used to generate the value of the token
+            // using a different string for each form improves its security
+            'csrf_token_id'   => 'task_item',
         ]);
     }
 }
