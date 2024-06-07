@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Module;
 use App\Entity\Program;
 use App\Entity\Session;
 use App\Entity\Student;
+use App\Form\ProgramType;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -98,28 +100,22 @@ class SessionController extends AbstractController
     }
 
     // Je crée mon program, je l'instancie, je lui set les infos, une fois le programme crée : session addprogram,  Pour program : Set session, set module, set nbjours
-    #[Route('/session/add_program/{session}/{program}', name: 'add_program_session', methods: ['POST'])]
-    public function addProgramSession(Session $session, Program $program, Request $request, EntityManagerInterface $entityManager)
+    #[Route('/session/add_program/{session}/{module}', name: 'add_program_session')]
+    public function addProgramSession(Session $session, Module $module, EntityManagerInterface $entityManager)
     {
 
-        $form = $this->createForm(SessionType::class, $session);
+        $program = new Program();
 
-        $form->handleRequest($request);
+        $nbDays = filter_input(INPUT_POST, 'nbDays', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $program->setSession($session);
+        $program->setModule($module);
+        $program->setNbDays($nbDays);
 
-            $program = $form->getData();
-            // Prepare PDO
-            $entityManager->persist($program);
-            // Execute PDO
-            $entityManager->flush();
+        $entityManager->persist($program);
+        $entityManager->flush();
 
-            $session->addProgram($program);
-            $entityManager->persist($session);
-            $entityManager->flush();
-    
-            return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
-        }
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
 
     #[Route('/session/remove_program/{session}/{program}', name: 'remove_program_session')]

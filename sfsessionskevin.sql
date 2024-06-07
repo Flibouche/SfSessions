@@ -31,19 +31,6 @@ INSERT INTO `category` (`id`, `name`) VALUES
 	(1, 'Développement'),
 	(2, 'Bureautique');
 
--- Listage de la structure de la table sfsessionskevin. doctrine_migration_versions
-CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
-  `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `executed_at` datetime DEFAULT NULL,
-  `execution_time` int DEFAULT NULL,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
-
--- Listage des données de la table sfsessionskevin.doctrine_migration_versions : ~2 rows (environ)
-INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-	('DoctrineMigrations\\Version20240604120721', '2024-06-04 12:08:04', 343),
-	('DoctrineMigrations\\Version20240604122550', '2024-06-04 12:26:12', 23);
-
 -- Listage de la structure de la table sfsessionskevin. former
 CREATE TABLE IF NOT EXISTS `former` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -109,13 +96,11 @@ CREATE TABLE IF NOT EXISTS `program` (
   KEY `IDX_92ED7784AFC2B591` (`module_id`),
   CONSTRAINT `FK_92ED7784613FECDF` FOREIGN KEY (`session_id`) REFERENCES `session` (`id`),
   CONSTRAINT `FK_92ED7784AFC2B591` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table sfsessionskevin.program : ~3 rows (environ)
+-- Listage des données de la table sfsessionskevin.program : ~1 rows (environ)
 INSERT INTO `program` (`id`, `session_id`, `module_id`, `nb_days`) VALUES
-	(1, 1, 1, 10),
-	(2, 1, 3, 5),
-	(3, 1, 2, 12);
+	(6, 1, 4, 3);
 
 -- Listage de la structure de la table sfsessionskevin. session
 CREATE TABLE IF NOT EXISTS `session` (
@@ -152,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table sfsessionskevin.student : ~2 rows (environ)
+-- Listage des données de la table sfsessionskevin.student : ~0 rows (environ)
 INSERT INTO `student` (`id`, `name`, `surname`, `sex`, `birthdate`, `town`, `mail`, `phone`) VALUES
 	(1, 'Test', 'TestS', 'M', '2010-10-10', 'Strasbourg', 'test@mail.com', '0666666666'),
 	(2, 'Deuxieme', 'TestEncore', 'F', '2000-10-05', 'Belfort', 'testencore@mail.com', '0360606060'),
@@ -169,11 +154,12 @@ CREATE TABLE IF NOT EXISTS `student_session` (
   CONSTRAINT `FK_3D72602CCB944F1A` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table sfsessionskevin.student_session : ~3 rows (environ)
+-- Listage des données de la table sfsessionskevin.student_session : ~0 rows (environ)
 INSERT INTO `student_session` (`student_id`, `session_id`) VALUES
-	(1, 1),
+	(1, 2),
 	(2, 1),
-	(3, 2);
+	(2, 2),
+	(3, 1);
 
 -- Listage de la structure de la table sfsessionskevin. user
 CREATE TABLE IF NOT EXISTS `user` (
@@ -185,11 +171,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `is_verified` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_IDENTIFIER_EMAIL` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table sfsessionskevin.user : ~1 rows (environ)
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `pseudo`, `is_verified`) VALUES
-	(3, 'flibouche@admin.com', '["ROLE_ADMIN"]', '$2y$13$06UyeoJxHFY3qDgiZHma8Oq72fhLIhnNfqCWRxfkdxMVU0yyfSgNO', 'Flibouche', 1);
+	(3, 'flibouche@admin.com', '["ROLE_ADMIN"]', '$2y$13$06UyeoJxHFY3qDgiZHma8Oq72fhLIhnNfqCWRxfkdxMVU0yyfSgNO', 'Flibouche', 1),
+	(4, 'test@mail.com', '[]', '$2y$13$S7dpUYRrD8xERvTtsV..0.bmXtkIRn/oQ2Z6CIijHvjHzvnHdkufu', 'Test', 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

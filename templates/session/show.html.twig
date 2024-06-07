@@ -102,20 +102,19 @@
                         <div>Nb Days</div>
                         <div>Add</div>
                     </div>
-                    {% for program in unscheduledModules %}
-                        <form action="{{ path('add_program_session', {'session': session.id, 'program': program.id}) }}" method="post">
+                    {% for module in unscheduledModules %}
+                        <form action="{{ path('add_program_session', {'session': session.id, 'module': module.id}) }}" method="post">
                             <div
                             class="grid grid-cols-3 px-4 py-2 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                                <div class="text-gray-500 dark:text-gray-400">{{ program }}</div>
+                                <div class="text-gray-500 dark:text-gray-400">{{ module }}</div>
                                 <div class="relative flex items-center max-w-[8rem]">
-                                    <input type="number" id="number-input" data-input-counter aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block h-6 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" min="0" required />
+                                    <input type="number" name="nbDays" id="number-input" data-input-counter aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block h-6 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" min="1" required />
                                 </div>
                                 <div>
-                                    <a href="{{ path('add_program_session', {'session':session.id, 'program':program.id}) }}">
-                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                    <input type="submit" value="Add">
+                                        {# <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                                        </svg>
-                                    </a>
+                                        </svg> #}
                                 </div>
                             </div>
                         </form>

@@ -106,6 +106,13 @@ class Former
         return $this;
     }
 
+    public function getAge(): ?string
+    {
+        $now = new \DateTime();
+        $interval = $this->birthdate->diff($now);
+        return $interval->format("%Y");
+    }
+
     public function getTown(): ?string
     {
         return $this->town;

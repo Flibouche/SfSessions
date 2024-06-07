@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of modules{% endblock %}
+
+{% block body %}
+
+<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+        <h1 class="w-full text-3xl text-black">Add Forms</h1>
+
+        <div class="w-full overflow-x-auto grid grid-cols-1 md:grid-cols-3 gap-10 my-10">
+                <a href="{{ path('new_session') }}"
+                    class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Session</h3>
+                </a>
+
+                <a href="{{ path('new_module') }}"
+                    class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Module</h3>
+                </a>
+
+                <a href="{{ path('new_category') }}"
+                    class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Category</h3>
+                </a>
+
+                <a href="{{ path('new_former') }}"
+                    class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Former</h3>
+                </a>
+
+                <a href="{{ path('new_student') }}"
+                    class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Student</h3>
+                </a>
+        </div>
+
+    </main>
+</div>
+
+{% endblock %}

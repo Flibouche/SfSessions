@@ -53,11 +53,10 @@ class SessionRepository extends ServiceEntityRepository
 
         $qb = $sub;
         // Sélectionner tous les modules d'une session dont l'ID est passé en paramètre
-        $qb->select('m.id')
-            ->from('App\Entity\Program', 'p')
-            ->leftJoin('p.module', 'm')
-            ->leftJoin('p.session', 's')
-            ->where('s.id = :id');
+        $qb->select('m')
+            ->from('App\Entity\Module', 'm')
+            ->leftJoin('m.programs', 'pr')
+            ->where('pr.session = :id');
 
         $sub = $em->createQueryBuilder();
         // Sélectionner tous les modules qui ne SONT PAS (NOT IN) dans le résultat précédent

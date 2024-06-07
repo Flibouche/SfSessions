@@ -19,4 +19,16 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/forms', name: 'app_forms')]
+    public function forms(): Response
+    {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('home/forms.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }
