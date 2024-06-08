@@ -15,15 +15,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ModuleController extends AbstractController
 {
     #[Route('/module', name: 'app_module')]
-    public function index(ModuleRepository $moduleRepository): Response
+    public function index(ModuleRepository $moduleRepository, Request $request): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
 
-        $modules = $moduleRepository->findBy([], ["title" => "ASC"]);
+        // $modules = $moduleRepository->findBy([], ["title" => "ASC"]);
+        $page = $request->query->getInt('page', 1);
+        $limit = 6;
+        $modules = $moduleRepository->paginateModules($page, $limit);
+        $maxPage = ceil($modules->count() / $limit);
         return $this->render('module/index.html.twig', [
             'modules' => $modules,
+            'maxPage' => $maxPage, 
+            'page' => $page
         ]);
     }
 

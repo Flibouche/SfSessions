@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Module;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Module>
@@ -14,6 +16,19 @@ class ModuleRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Module::class);
+    }
+
+    public function paginateModules(int $page, int $limit): Paginator
+    {
+        return new Paginator(
+            $this
+                ->createQueryBuilder('r')
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit)
+                ->getQuery()
+                ->setHint(Paginator::HINT_ENABLE_DISTINCT, false),
+                false
+        );
     }
 
     //    /**

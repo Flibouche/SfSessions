@@ -21,6 +21,15 @@
             {% endfor %}
         </div>
 
+        <div class="d flex">
+            {% if page > 1 %}
+                <a href="{{ path('app_module', {page: page - 1}) }}" class="btn btn-secondary">Page précédente</a>
+            {% endif %}
+            {% if page < maxPage %}
+                <a href="{{ path('app_module', {page: page + 1}) }}" class="btn btn-secondary">Page suivante</a>
+            {% endif %}
+        </div>
+
     </main>
 </div>
 
