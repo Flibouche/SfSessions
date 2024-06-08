@@ -23,13 +23,9 @@ class ModuleController extends AbstractController
 
         // $modules = $moduleRepository->findBy([], ["title" => "ASC"]);
         $page = $request->query->getInt('page', 1);
-        $limit = 6;
-        $modules = $moduleRepository->paginateModules($page, $limit);
-        $maxPage = ceil($modules->count() / $limit);
+        $modules = $moduleRepository->paginateModules($page);
         return $this->render('module/index.html.twig', [
-            'modules' => $modules,
-            'maxPage' => $maxPage, 
-            'page' => $page
+            'modules' => $modules
         ]);
     }
 

@@ -7,28 +7,38 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Module>
  */
 class ModuleRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator)
     {
         parent::__construct($registry, Module::class);
     }
 
-    public function paginateModules(int $page, int $limit): Paginator
+    public function paginateModules(int $page): PaginationInterface
     {
-        return new Paginator(
-            $this
-                ->createQueryBuilder('r')
-                ->setFirstResult(($page - 1) * $limit)
-                ->setMaxResults($limit)
-                ->getQuery()
-                ->setHint(Paginator::HINT_ENABLE_DISTINCT, false),
-                false
+
+        return $this->paginator->paginate(
+            $this->createQueryBuilder('r'),
+            $page,
+            6
         );
+
+
+        // return new Paginator(
+        //     $this
+        //         ->createQueryBuilder('r')
+        //         ->setFirstResult(($page - 1) * $limit)
+        //         ->setMaxResults($limit)
+        //         ->getQuery()
+        //         ->setHint(Paginator::HINT_ENABLE_DISTINCT, false),
+        //         false
+        // );
     }
 
     //    /**
