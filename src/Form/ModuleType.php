@@ -18,7 +18,7 @@ class ModuleType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'attr' => [
-                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded',
+                    'class' => 'w-full px-5 py-4 text-gray-700 bg-gray-200 rounded',
                     'placeholder' => 'Title',
                 ]
             ])
@@ -27,7 +27,7 @@ class ModuleType extends AbstractType
                 'choice_label' => 'name',
                 'attr' => [
                     'id' => 'select',
-                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                    'class' => 'w-full px-5 py-4 text-gray-700 bg-gray-200 rounded'
                 ]
             ])
             ->add('add', SubmitType::class, [

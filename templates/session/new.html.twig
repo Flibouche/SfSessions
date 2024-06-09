@@ -15,11 +15,7 @@ endblock %} {% block body %}
           <i class="fas fa-list mr-3"></i> New session Form
         </p>
         <div class="leading-loose">
-          {{
-            form_start(formAddSession, {
-              attr: { class: "p-10 bg-white rounded shadow-xl" }
-            })
-          }}
+          {{ form_start(formAddSession) }}
 
           <div class="row">
             <div class="col-sm">
@@ -41,9 +37,6 @@ endblock %} {% block body %}
             {{ form_row(formAddSession.programDetails) }}
           </div>
           <div class="row">
-            {# <div class="col-sm">
-              {{ form_row(formAddSession.students) }}
-            </div> #}
             <div class="col-sm">
               {{ form_row(formAddSession.former) }}
             </div>

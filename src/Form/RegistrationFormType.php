@@ -18,8 +18,24 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
-            ->add('pseudo', TextType::class)
+            ->add('email', EmailType::class, [
+                'label_attr' => [
+                    'class' => 'block mb-2 text-sm font-medium text-gray-900 dark:text-white',
+                ],
+                'attr' => [
+                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-50',
+                    'placeholder' => 'Email',
+                ]
+            ])
+            ->add('pseudo', TextType::class, [
+                'label_attr' => [
+                    'class' => 'block mb-2 text-sm font-medium text-gray-900 dark:text-white',
+                ],
+                'attr' => [
+                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-50',
+                    'placeholder' => 'Pseudo',
+                ]
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -34,8 +50,18 @@ class RegistrationFormType extends AbstractType
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Password', 'label_attr' => [
+                    'class' => 'block mb-2 text-sm font-medium text-gray-900 dark:text-white',
+                ], 'attr' => [
+                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-50',
+                    'placeholder' => 'Password',
+                ]],
+                'second_options' => ['label' => 'Repeat Password', 'label_attr' => [
+                    'class' => 'block mb-2 text-sm font-medium text-gray-900 dark:text-white',
+                ], 'attr' => [
+                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-50',
+                    'placeholder' => 'Repeat Password',
+                ]],
             ]);
     }
 

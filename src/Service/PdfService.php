@@ -5,9 +5,6 @@ namespace App\Service;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-use Nucleos\DompdfBundle\Factory\DompdfFactoryInterface;
-use Nucleos\DompdfBundle\Wrapper\DompdfWrapperInterface;
-
 class PdfService
 {
     private $domPdf;

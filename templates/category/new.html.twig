@@ -4,8 +4,36 @@
 
 {% block body %}
 
-{{ form_start(formAddCategory) }}
+<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+        <h1 class="w-full text-3xl text-black">Add a category</h1>
+        <a href="{{ path('app_category') }}"><i class="fa-solid fa-rotate-left"></i></a>
 
-{{ form_end(formAddCategory) }}
+        <div class="flex flex-wrap mb-10">
+            <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
+                <p class="text-xl pb-6 flex items-center">
+                    <i class="fas fa-list mr-3"></i> New category Form
+                </p>
+                <div class="leading-loose">
+
+                    {{ form_start(formAddCategory) }}
+
+                    <div class="row">
+                        <div class="col-sm">
+                            {{ form_row(formAddCategory.name) }}
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        {{ form_row(formAddCategory.add) }}
+                    </div>
+
+                    {{ form_end(formAddCategory) }}
+
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
 
 {% endblock %}

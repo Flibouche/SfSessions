@@ -4,8 +4,63 @@
 
 {% block body %}
 
-{{ form_start(formAddFormer) }}
+<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+        <h1 class="w-full text-3xl text-black">Add a former</h1>
+        <a href="{{ path('app_former') }}"><i class="fa-solid fa-rotate-left"></i></a>
 
-{{ form_end(formAddFormer) }}
+        <div class="flex flex-wrap mb-10">
+            <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
+                <p class="text-xl pb-6 flex items-center">
+                    <i class="fas fa-list mr-3"></i> New former Form
+                </p>
+                <div class="leading-loose">
+
+                    {{ form_start(formAddFormer) }}
+
+                    <div class="flex gap-2">
+                        <div class="w-full">
+                            {{ form_row(formAddFormer.name) }}
+                        </div>
+                        <div class="w-full">
+                            {{ form_row(formAddFormer.surname) }}
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <div class="w-full">
+                            {{ form_row(formAddFormer.sex) }}
+                        </div>
+                        <div class="w-full">
+                            {{ form_row(formAddFormer.birthdate) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            {{ form_row(formAddFormer.town) }}
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <div class="w-full">
+                            {{ form_row(formAddFormer.phone) }}
+                        </div>
+                        <div class="w-full">
+                            {{ form_row(formAddFormer.mail) }}
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        {{ form_row(formAddFormer.add) }}
+                    </div>
+
+                    {{ form_end(formAddFormer) }}
+
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
 
 {% endblock %}

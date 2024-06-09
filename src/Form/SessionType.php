@@ -22,30 +22,33 @@ class SessionType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'attr' => [
-                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded',
+                    'class' => 'w-full px-5 py-4 text-gray-700 bg-gray-200 rounded',
                     'placeholder' => 'Title',
                 ]
             ])
             ->add('startDate', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                    'class' => 'w-full px-5 py-4 text-gray-700 bg-gray-200 rounded'
                 ]
             ])
             ->add('endDate', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                    'class' => 'w-full px-5 py-4 text-gray-700 bg-gray-200 rounded'
                 ]
             ])
             ->add('nbPlaces', IntegerType::class, [
                 'attr' => [
-                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                    'class' => 'w-full px-5 py-4 text-gray-700 bg-gray-200 rounded',
+                    'min' => 1,
+                    'placeholder' => '1',
                 ]
             ])
             ->add('programDetails', TextType::class, [
                 'attr' => [
-                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                    'class' => 'w-full px-5 py-4 text-gray-700 bg-gray-200 rounded',
+                    'placeholder' => 'Enter details to the program'
                 ]
             ])
             ->add('former', EntityType::class, [
@@ -53,7 +56,7 @@ class SessionType extends AbstractType
                 'choice_label' => 'fullName',
                 'attr' => [
                     'id' => 'select',
-                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                    'class' => 'w-full px-5 py-4 text-gray-700 bg-gray-200 rounded'
                 ]
             ])
             ->add('category', EntityType::class, [
@@ -61,7 +64,7 @@ class SessionType extends AbstractType
                 'choice_label' => 'name',
                 'attr' => [
                     'id' => 'select',
-                    'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded'
+                    'class' => 'w-full px-5 py-4 text-gray-700 bg-gray-200 rounded'
                 ]
             ])
             ->add('add', SubmitType::class, [

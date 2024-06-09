@@ -17,7 +17,7 @@ class CategoryType extends AbstractType
             ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'w-full px-5  py-4 text-gray-700 bg-gray-200 rounded',
-                    'placeholder' => 'Title',
+                    'placeholder' => 'Name',
                 ]
             ])
             ->add('add', SubmitType::class, [
