@@ -35,7 +35,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Email must not be empty.'
                     ]),
                     new Regex([
-                        'pattern' => '^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$',
+                        'pattern' => '^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$^',
                         'message' => 'Email incorrect.'
                     ]),
                     new Length([
