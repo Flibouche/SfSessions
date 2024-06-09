@@ -9,6 +9,7 @@ use App\Entity\Student;
 use App\Form\ProgramType;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
+use App\Service\PdfService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -143,5 +144,16 @@ class SessionController extends AbstractController
             'notRegistered' => $notRegistered,
             'unscheduledModules' => $unscheduledModules
         ]);
+    }
+
+    #[Route('session/{id}/pdf', name: 'session.pdf')]
+    public function generatePdfSession(Session $session = null, SessionRepository $sr, PdfService $pdf)
+    {
+
+        $notRegistered = $sr->findNotRegistered($session->getId());
+        $unscheduledModules = $sr->findUnscheduledModules($session->getId());
+
+        $html = $this->render('session/show.html.twig', ['session' => $session, 'notRegistered' => $notRegistered, 'unscheduledModules' => $unscheduledModules]);
+        $pdf->showPdfFile($html);
     }
 }
