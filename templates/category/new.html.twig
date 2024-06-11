@@ -33,6 +33,11 @@
                 </div>
             </div>
         </div>
+
+        {% for message in app.flashes('mercuryseries_flashy_notification') %}
+        <p>{{ message }}</p>
+        {% endfor %}
+
     </main>
 </div>
 

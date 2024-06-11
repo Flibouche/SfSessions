@@ -7,17 +7,22 @@
 <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
     <main class="w-full flex-grow p-6">
         <h1 class="w-full text-3xl text-black mb-5">List of categories</h1>
-        <a href="{{ path('new_category') }}" class="mb-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-block">Add a category</a>
+        <a href="{{ path('new_category') }}"
+            class="mb-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-block">Add
+            a category</a>
 
         <div class="w-full overflow-x-auto grid grid-cols-1 md:grid-cols-3 gap-10 my-10">
             {% for category in categories %}
-                <a href="{{ path('show_category', {'id': category.id}) }}" 
+            <div>
+                <a href="{{ path('show_category', {'id': category.id}) }}"
                     class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ category }}</h3>
+                    <a href="{{ path('delete_category', {'id': category.id}) }}"><i
+                            class="fa-solid fa-trash-can"></i></a>
                 </a>
+            </div>
             {% endfor %}
         </div>
-
     </main>
 </div>
 

@@ -7,6 +7,7 @@ use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,7 @@ class CategoryController extends AbstractController
 
     #[Route('/category/new', name: 'new_category')]
     #[Route('/category/{id}/edit', name: 'edit_category')]
-    public function new_edit(Category $category = null, Request $request, EntityManagerInterface $entityManager): Response
+    public function new_edit(Category $category = null, Request $request, EntityManagerInterface $entityManager, FlashyNotifier $flashy): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -50,8 +51,11 @@ class CategoryController extends AbstractController
             // Execute PDO
             $entityManager->flush();
 
+            $flashy->success('Category added !', 'http://your-awesome-link.com');
+
             return $this->redirectToRoute('app_category');
         }
+
 
         return $this->render('category/new.html.twig', [
             'formAddCategory' => $form,
@@ -59,7 +63,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/category/{id}/delete', name: 'delete_category')]
-    public function delete(category $category, EntityManagerInterface $entityManager)
+    public function delete(category $category, EntityManagerInterface $entityManager, FlashyNotifier $flashy)
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -67,6 +71,8 @@ class CategoryController extends AbstractController
         
         $entityManager->remove($category);
         $entityManager->flush();
+
+        $flashy->warning('Category deleted !', 'http://your-awesome-link.com');
 
         return $this->redirectToRoute('app_category');
     }
