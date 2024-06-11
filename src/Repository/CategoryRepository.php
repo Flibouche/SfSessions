@@ -16,6 +16,23 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+    public function findByWord($key)
+    {
+        $em = $this->getEntityManager();
+
+        $sub = $em->createQueryBuilder();
+
+        $qb = $sub;
+
+        $qb->select('c')
+            ->from('App\Entity\Category', 'c')
+            ->where('c.name LIKE :key')
+            ->setParameter('key', '%' . $key . '%');
+
+        $query = $sub->getQuery();
+        return $query->getResult();
+    }
+
     //    /**
     //     * @return Category[] Returns an array of Category objects
     //     */

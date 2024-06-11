@@ -29,7 +29,6 @@ class ModuleRepository extends ServiceEntityRepository
             6
         );
 
-
         // return new Paginator(
         //     $this
         //         ->createQueryBuilder('r')
@@ -39,6 +38,23 @@ class ModuleRepository extends ServiceEntityRepository
         //         ->setHint(Paginator::HINT_ENABLE_DISTINCT, false),
         //         false
         // );
+    }
+
+    public function findByWord($key)
+    {
+        $em = $this->getEntityManager();
+
+        $sub = $em->createQueryBuilder();
+
+        $qb = $sub;
+
+        $qb->select('m')
+            ->from('App\Entity\Module', 'm')
+            ->where('m.title LIKE :key')
+            ->setParameter('key', '%'.$key.'%');
+
+        $query = $sub->getQuery();
+        return $query->getResult();
     }
 
     //    /**

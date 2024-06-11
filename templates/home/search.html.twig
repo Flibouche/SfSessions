@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search{% endblock %}
+
+{% block body %}
+
+<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+        <h1 class="w-full text-3xl text-black mb-5 dark:text-white">Search results</h1>
+
+        {% if categories %}
+        <div class="mb-5">
+
+            <h2 class="w-full text-2xl text-black mb-3 dark:text-white">Categories :</h1>
+
+                {% for category in categories %}
+                <a href="{{ path('show_category', {'id': category.id}) }}">
+                    <p>{{ category.name }}</p>
+                </a>
+
+                {% endfor %}
+
+        </div>
+        {% endif %}
+
+        {% if modules %}
+        <div class="mb-5">
+
+            <h2 class="w-full text-2xl text-black mb-3 dark:text-white">Modules :</h1>
+
+                {% for module in modules %}
+                <a href="{{ path('show_module', {'id': module.id}) }}">
+                    <p>{{ module.title }}</p>
+                </a>
+
+                {% endfor %}
+
+        </div>
+        {% endif %}
+
+    </main>
+</div>
+
+{% endblock %}
