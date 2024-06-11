@@ -18,18 +18,25 @@ class CategoryRepository extends ServiceEntityRepository
 
     public function findByWord($key)
     {
+        // Obtient l'EntityManager pour interagir avec la base de données.
         $em = $this->getEntityManager();
-
+    
+        // Crée un nouveau QueryBuilder.
         $sub = $em->createQueryBuilder();
-
+    
+        // Référence au QueryBuilder pour simplifier le code.
         $qb = $sub;
-
-        $qb->select('c')
-            ->from('App\Entity\Category', 'c')
-            ->where('c.name LIKE :key')
-            ->setParameter('key', '%' . $key . '%');
-
+    
+        // Construit la requête pour sélectionner les entités 'Category' dont le nom contient le mot clé.
+        $qb->select('c') // Sélectionne l'entité 'Category' en tant que 'c'.
+            ->from('App\Entity\Category', 'c') // Définit la source des données comme étant l'entité 'Category'.
+            ->where('c.name LIKE :key') // Ajoute une condition WHERE pour filtrer les catégories dont le nom contient le mot clé.
+            ->setParameter('key', '%' . $key . '%'); // Définit le paramètre 'key' avec des jokers pour une recherche partielle.
+    
+        // Crée et exécute la requête.
         $query = $sub->getQuery();
+    
+        // Retourne les résultats de la requête.
         return $query->getResult();
     }
 

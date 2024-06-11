@@ -207,9 +207,6 @@
     {{ encore_entry_script_tags('app') }}
     <!-- AlpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <!-- ChartJS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-        integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
     {# Dark Mode #}
     <script>
         // Dark mode
@@ -217,16 +214,16 @@
         if (
             localStorage.getItem("color-theme") === "dark" ||
             (!("color-theme" in localStorage) &&
-                window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-            document.documentElement.classList.add("dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-        }
-
-        var themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
-        var themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
-
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+            ) {
+                document.documentElement.classList.add("dark");
+                } else {
+                    document.documentElement.classList.remove("dark");
+                    }
+                    
+                    var themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
+                    var themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
+                    
         // Change the icons inside the button based on previous settings
         if (
             localStorage.getItem("color-theme") === "dark" ||
@@ -237,7 +234,7 @@
         } else {
             themeToggleDarkIcon.classList.remove("hidden");
         }
-
+        
         var themeToggleBtn = document.getElementById("theme-toggle");
 
         themeToggleBtn.addEventListener("click", function () {
